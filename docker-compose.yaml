@@ -4,4 +4,4 @@ services:
     container_name: themius-ui
     build: .
     ports:
-      - 3000:3000
+      - 3001:3000
