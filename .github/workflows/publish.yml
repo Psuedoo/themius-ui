@@ -14,5 +14,5 @@ jobs:
         uses: alex-ac/github-action-ssh-docker-compose@master
         with:
           ssh_host: ${{ secrets.SERVER_HOSTNAME }} 
-          ssh_private_key: ${{ secrets.SERVER_SSH_PRIVATE_KEY }}
+          ssh_private_key: ${{ secrets.SERVER_TEST_SSH_KEY }}
           ssh_user: ${{ secrets.SERVER_SSH_USER }}
