@@ -1,3 +1,3 @@
 export default function Dashboard() {
-  return <h1>Dashboard</h1>;
+  return <div className="bg-red-500 flex flex-auto ">Dashboard</div>;
 }
