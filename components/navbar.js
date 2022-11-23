@@ -49,6 +49,7 @@ function NavPages(props) {
         const href = "/" + value.value;
         return (
           <NavButton
+            key={value.id}
             href={href}
             label={value.title}
             border="1px solid red"
@@ -70,9 +71,9 @@ export default function Navbar() {
         <Box className="flex flex-col">
           <NavPages
             options={[
-              { value: "dashboard", title: "Dashboard" },
-              { value: "regulars", title: "Regulars" },
-              { value: "account", title: "Account" },
+              { id: 1, value: "dashboard", title: "Dashboard" },
+              { id: 2, value: "regulars", title: "Regulars" },
+              { id: 3, value: "account", title: "Account" },
             ]}
           />
         </Box>
