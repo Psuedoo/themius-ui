@@ -1,36 +1,35 @@
-import PocketBase from "pocketbase";
 import { useEffect, useState } from "react";
+import { getChatters } from "../utils/db";
 
-async function getRegulars() {
-  const pb = new PocketBase("https://pocketbase.theflinners.com");
+function RegularsTable() {
+  const [regulars, setRegulars] = useState([]);
 
-  const adminData = await pb.admins.authWithPassword("email", "password");
+  useEffect(() => {
+    getChatters().then((regulars) => setRegulars(regulars));
+  }, []);
 
-  const data = await pb.collection("chatters").getFullList();
-  return data;
+  return (
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Username</th>
+        </tr>
+      </thead>
+      <tbody>
+        {regulars &&
+          regulars.map((regular) => (
+            <tr key={regular.id}>
+              <td>{regular.id}</td>
+              <td>{regular.username}</td>
+            </tr>
+          ))}
+      </tbody>
+    </table>
+  );
 }
 
 export default function Regulars() {
-  const [regulars, setRegulars] = useState([]);
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    setLoading(true);
-    const fetchRegulars = async () => {
-      const regulars = await getRegulars();
-      setRegulars(regulars);
-    };
-    // fetchRegulars();
-    setLoading(false);
-  }, []);
-  return (
-    <div>
-      {loading ? (
-        <div>Loading...</div>
-      ) : (
-        regulars.map((regular) => {
-          return <div key={regular.id}>{regular.username}</div>;
-        })
-      )}
-    </div>
-  );
+  const [loading, setLoading] = useState(false);
+  return <div>{loading ? <div>Loading...</div> : <RegularsTable />}</div>;
 }
